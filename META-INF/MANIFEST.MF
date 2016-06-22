@@ -1,0 +1,9 @@
+rManifest-Version: 1.0
+Bundle-SymbolicName: com.apigee.statistics;singleton:=true
+Bundle-Name: Apigee Statistics
+Bundle-Version: 1.0.1
+Bundle-ClassPath: .,lib/gson-2.2.4.jar
+Require-Bundle: com.dynatrace.diagnostics.sdk
+Bundle-ManifestVersion: 2
+Bundle-Vendor: Buford Kelly
+

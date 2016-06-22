@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<!-- plugin.xml file written by dynaTrace Client 6.3.4 -->
+<plugin>
+  <extension point="com.dynatrace.diagnostics.pdk.pluginconfig" id="com.apigee.statistics" name="Apigee Statistics">
+    <information>
+      <category value="" />
+      <displayname value="Apigee Statistics" />
+      <description value="If you wish to connect to Apigee and return any statistics from the apis available for analysis of performance and usage. If you wish to learn more about what you can do with the Apigee apis please look here: http://docs.apigee.com/analytics-services/reference/analytics-reference" />
+      <supportlevel value="unsupported" />
+    </information>
+    <configuration>
+      <property key="query" label="Query" type="string" description="This proprerty can be used to query your Apigee service using a Apigee Api url:&#xA;Example: https://api.enterprise.apigee.com/v1/organizations/{your_org}/environments/{your_env}/stats/?select=sum(message_count)&amp;timeRange=06/06/2016%2000:00~06/06/2016%2024:00&#xA;&#xA;for more information see: http://docs.apigee.com/analytics-services/reference/analytics-reference&#xA;" default="https://api.enterprise.apigee.com/v1/organizations/{your_org}/environments/{your_env}/stats/?select=sum(message_count)&amp;timeRange=06/06/2016%2000:00~06/06/2016%2024:00" multiline="false" />
+      <property key="uid" label="User Name" type="string" description="username for Apigee stat apis" default="user@company.com" multiline="false" />
+      <property key="pwd" label="Password" type="password" description="password for apigee stat apis" default="default" />
+      <property key="timerange" label="Time Range" type="list" description="Time frame for Apigee to collect, these are static:&#xA;1 minute (now minus 1 minute)&#xA;1 hour (now minus 1 hour)&#xA;1 day (now minus 1 day)&#xA;1 month (now minus 1 month)" default="1 minute">
+        <list>
+          <item value="1 minute" />
+          <item value="1 hour" />
+          <item value="1 day" />
+          <item value="1 month" />
+        </list>
+      </property>
+    </configuration>
+  </extension>
+  <extension point="com.dynatrace.diagnostics.pdk.monitor" id="com.apigee.statistics.monitor" name="Apigee Statistics">
+    <plugin configid="com.apigee.statistics" class="com.apigee.StatService" />
+  </extension>
+  <extension point="com.dynatrace.diagnostics.pdk.monitormetricgroup" id="com.apigee.statistics.resultsgroup" name="ResultsGroup">
+    <metricgroup monitorid="com.apigee.statistics.monitor">
+      <metric defaultrate="purepath" name="Result" unit="number" description="This is the results of the query you posted to Apigee. It is returned in a number format" />
+    </metricgroup>
+  </extension>
+</plugin>
